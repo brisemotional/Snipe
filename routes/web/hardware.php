@@ -157,5 +157,5 @@ Route::resource('hardware', 'AssetsController', [
     'middleware' => ['auth'],
     'parameters' => ['asset' => 'asset_id']
 ]);
+
 Route::resource('project.hardware', 'AssetsController');
-Route::resource('pp.hardware', 'AssetsController');

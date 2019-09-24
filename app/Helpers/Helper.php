@@ -19,6 +19,7 @@ use App\Models\Accessory;
 use App\Models\Consumable;
 use App\Models\Asset;
 use App\Models\Setting;
+use App\Models\Project;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 
@@ -668,7 +669,15 @@ class Helper
         }
         return false;
     }
-
+    
+    public static function parent_project_list(){
+        $project = Project::where('parent_id','=',0)->get();
+        return $project;
+    }
+    public static function children_project_list($id){
+        $project = Project::where('parent_id','=',$id)->get();
+        return $project;
+    }
 
 
 

@@ -102,7 +102,12 @@ class AssetsController extends Controller
         // These are used by the API to query against specific ID numbers.
         // They are also used by the individual searches on detail pages like
         // locations, etc.
-        $assets->where('projectID', '=', $request->projectID);
+        if ($request->projectID != 0) {
+            $assets->join('project-assets', 'project-assets.assets_id', '=', 'assets.id')
+                   ->where('project-assets.project_id', '=', $request->projectID);
+                   
+        }
+        
         if ($request->filled('status_id')) {
             $assets->where('assets.status_id', '=', $request->input('status_id'));
         }

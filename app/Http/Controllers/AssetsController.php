@@ -68,7 +68,7 @@ class AssetsController extends Controller
      * @since [v1.0]
      * @return View
      */
-    public function index(Request $request,$project)
+    public function index(Request $request,$project=0)
     {
         $this->authorize('index', Asset::class);
         if ($request->filled('company_id')) {

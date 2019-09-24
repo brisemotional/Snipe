@@ -29,11 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('project', 'ProjectController', [
         'parameters' => ['project' => 'projectID']
     ]);
-    Route::resource('pp', 'PpController', [
-        'parameters' => ['pp' => 'ppID']
-    ]);
-
-
+    
     /*
     * Manufacturers
     */
