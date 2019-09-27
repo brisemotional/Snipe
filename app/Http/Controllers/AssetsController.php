@@ -16,6 +16,7 @@ use App\Models\Import;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Project;
 use Artisan;
 use Auth;
 use Carbon\Carbon;
@@ -112,8 +113,9 @@ class AssetsController extends Controller
      */
     public function store(AssetRequest $request)
     {
+        $parentprojectID = Project::find($request->input('projectID'))->parent_id;
         $this->authorize(Asset::class);
-
+        
 
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find($request->input('model_id')));
@@ -137,6 +139,8 @@ class AssetsController extends Controller
         $asset->supplier_id             = request('supplier_id', 0);
         $asset->requestable             = request('requestable', 0);
         $asset->rtd_location_id         = request('rtd_location_id', null);
+        $asset->projectID               = $request->input('projectID');
+        $asset->parentprojectID         = $parentprojectID;
 
         if ($asset->assigned_to=='') {
             $asset->location_id = $request->input('rtd_location_id', null);

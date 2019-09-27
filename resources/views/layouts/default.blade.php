@@ -696,16 +696,8 @@
                 </ul>
             </li>
             @endcan
-
-            @can('viewRequestable', \App\Models\Asset::class)
-            <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
-                <a href="{{ route('requestable-assets') }}">
-                  <i class="fa fa-laptop"></i>
-                  <span>{{ trans('admin/hardware/general.requestable') }}</span>
-                </a>
-            </li>
-            @endcan
-            @can('index', \App\Models\Asset::class)
+            <!-- ddd -->
+            <!-- @can('index', \App\Models\Asset::class)
             <li class="treeview{{ (Request::is('project/9/hardware') ||  Request::is('project/2/hardware') ||  Request::is('project/3/hardware') ||  Request::is('project/4/hardware') ||  Request::is('project/10/hardware') ||  Request::is('project/6/hardware') ||  Request::is('project/7/hardware') ||  Request::is('project/8/hardware')? ' active' : '') }}">
               <a href="">
                 <i class="fa fa-folder"></i>
@@ -724,6 +716,58 @@
                             <?php $child_projects = \App\Helpers\Helper::children_project_list($project->id); ?>
                             @foreach($child_projects as $child)
                             <li class="dropdown-item" ><a href="{{ url('project/'.$child->id.'/hardware') }}">{{$child->project_name}}</a></li>
+                            @endforeach                
+                        </ul>
+                      </li>  
+                  </ul>
+                </li>
+                @endforeach
+                
+              </ul>                
+            </li>
+            @endcan -->
+            <!-- fdsfs -->
+            @can('viewRequestable', \App\Models\Asset::class)
+            <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
+                <a href="{{ route('requestable-assets') }}">
+                  <i class="fa fa-laptop"></i>
+                  <span>{{ trans('admin/hardware/general.requestable') }}</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('index', \App\Models\Asset::class)
+            <li class="treeview{{ (Request::is('project/9/hardware') ||  Request::is('project/2/hardware') ||  Request::is('project/3/hardware') ||  Request::is('project/4/hardware') ||  Request::is('project/10/hardware') ||  Request::is('project/6/hardware') ||  Request::is('project/7/hardware') ||  Request::is('project/8/hardware')? ' active' : '') }}">
+              <a href="">
+                <i class="fa fa-folder"></i>
+                <span>{{ trans('general.project') }}</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                
+                <?php $projects = \App\Helpers\Helper::parent_project_list(); ?>
+                @foreach($projects as $project)
+                <li class="treeview{{ (Request::is('project/'.$project->id.'/hardware') ? ' active' : '') }}">                  
+                  <ul class="sidebar-menu">              
+                      <li  class="dropdown-item dropdown" style="position: relative;">
+                        <a href="{{ url('project/'.$project->id.'/hardware') }}" class="dropdown-toggle"  data-toggle="" aria-haspopup="true" aria-expanded="true">{{$project->project_name}}</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown2-1-1" style="top: 5px; left: 223px;display: block;">
+                            <?php $child_projects = \App\Helpers\Helper::children_project_list($project->id); ?>
+                            @foreach($child_projects as $child)
+                               
+                                  <li class="treeview">                  
+                                    <ul class="sidebar-menu">              
+                                        <li  class="dropdown-item dropdown" style="position: relative;">
+                                          <a href="{{ url('project/'.$child->id.'/hardware') }}" class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{{$child->project_name}}</a>
+                                          <ul class="dropdown-menu" aria-labelledby="dropdown2-1-1" style="top: 0px; left: 160px;display: block;">                 
+                                              <li class="dropdown-item" ><a href="{{ url('project/'.$child->id.'/hardware') }}">Assets</a></li> 
+                                              <li class="dropdown-item" ><a href="">Lisences</a></li>
+                                              <li class="dropdown-item" ><a href="">Accessories</a></li>                           
+                                          </ul>
+                                        </li>  
+                                    </ul>
+                                  </li>
+                                
                             @endforeach                
                         </ul>
                       </li>  

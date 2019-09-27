@@ -674,9 +674,17 @@ class Helper
         $project = Project::where('parent_id','=',0)->get();
         return $project;
     }
+    public static function childrens_project_list(){
+        $project = Project::where('parent_id','!=',0)->orderBy('parent_id')->get();
+        return $project;
+    }
     public static function children_project_list($id){
         $project = Project::where('parent_id','=',$id)->get();
         return $project;
+    }
+    public static function projectID($id){
+        $project = Assets::find($id);
+        return Assets::find($id);
     }
 
 

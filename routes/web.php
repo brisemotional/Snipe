@@ -29,7 +29,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('project', 'ProjectController', [
         'parameters' => ['project' => 'projectID']
     ]);
-    
+    Route::group(['prefix' => 'project','middleware' => ['auth']],
+        function () {
+
+            Route::post( 'projectid',  [
+                'as' => 'project/projectid',
+                'uses' => 'ProjectController@projectid'
+            ]);
+            Route::post( 'parentprojectid',  [
+                'as' => 'project/parentprojectid',
+                'uses' => 'ProjectController@parentprojectid'
+            ]);
+
+    });
+
     /*
     * Manufacturers
     */

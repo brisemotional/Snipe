@@ -159,3 +159,4 @@ Route::resource('hardware', 'AssetsController', [
 ]);
 
 Route::resource('project.hardware', 'AssetsController');
+

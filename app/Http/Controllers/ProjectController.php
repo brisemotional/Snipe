@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Project;
+use App\Models\Asset;
 
 class ProjectController extends Controller
 {
@@ -80,5 +82,36 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function projectid(Request $request)
+
+    {
+
+        //$input = $request->all();
+        $projectID = Asset::find($request['id'])->projectID;
+        $project_name = "";
+        if ($projectID != null) {
+
+            $project_name = Project::find($projectID)->project_name;
+        }
+        
+        return response()->json(['project_name'=>$project_name]);
+
+    }
+    public function parentprojectid(Request $request)
+
+    {
+
+        //$input = $request->all();
+        $projectID = Asset::find($request['id'])->parentprojectID;
+        $project_name = "";
+        if ($projectID != null) {
+            
+            $project_name = Project::find($projectID)->project_name;
+        }
+        
+        return response()->json(['project_name'=>$project_name]);
+
     }
 }

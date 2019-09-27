@@ -103,8 +103,7 @@ class AssetsController extends Controller
         // They are also used by the individual searches on detail pages like
         // locations, etc.
         if ($request->projectID != 0) {
-            $assets->join('project-assets', 'project-assets.assets_id', '=', 'assets.id')
-                   ->where('project-assets.project_id', '=', $request->projectID);
+            $assets->where('projectID', '=', $request->projectID)->orWhere('parentprojectID', '=', $request->projectID);
                    
         }
         
@@ -427,6 +426,7 @@ class AssetsController extends Controller
      */
     public function store(AssetRequest $request)
     {
+        
 
         $this->authorize('create', Asset::class);
 

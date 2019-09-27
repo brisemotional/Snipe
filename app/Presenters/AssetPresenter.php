@@ -35,7 +35,7 @@ class AssetPresenter extends Presenter
                 "switchable" => true,
                 "title" => trans('general.company'),
                 "visible" => false,
-                "formatter" => 'assetCompanyObjFilterFormatter'
+                "formatter" => "assetCompanyObjFilterFormatter"
             ], [
                 "field" => "name",
                 "searchable" => true,
@@ -244,6 +244,20 @@ class AssetPresenter extends Presenter
                 "visible" => false,
                 "title" => trans('general.next_audit_date'),
                 "formatter" => "dateDisplayFormatter"
+            ], [
+                "field" => "Project",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => true,
+                "title" => "Project",
+                "formatter" => "assetProjectFilterFormatter"
+            ], [
+                "field" => "ParentProject",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => true,
+                "title" => "ParentProject",
+                "formatter" => "assetParentProjectFilterFormatter"
             ],
         ];
 

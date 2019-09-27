@@ -228,7 +228,7 @@ class AssetAuditPresenter extends Presenter
                 "visible" => true,
                 "title" => trans('general.next_audit_date'),
                 "formatter" => "dateDisplayFormatter"
-            ],
+            ], 
         ];
 
         // This looks complicated, but we have to confirm that the custom fields exist in custom fieldsets

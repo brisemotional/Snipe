@@ -76,6 +76,8 @@
 
   @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/hardware/general.requestable')])
 
+
+
   <!-- Image -->
   @if ($item->image)
   <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
@@ -93,7 +95,7 @@
   @endif
 
 @include ('partials.forms.edit.image-upload')
-
+@include ('partials.forms.edit.project-select', ['translated_name' => 'Project', 'fieldname' => 'projectID'])
 @stop
 
 @section('moar_scripts')

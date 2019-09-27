@@ -7,6 +7,7 @@ use App\Http\Controllers\CheckInOutRequest;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -114,6 +115,8 @@ class BulkAssetsController extends Controller
                     }
                 }
 
+                $this->update_array['projectID'] = $request->input('projectID');
+                $this->update_array['parentprojectID'] = Project::find($request->input('projectID'))->parent_id;
                 DB::table('assets')
                     ->where('id', $assetId)
                     ->update($this->update_array);

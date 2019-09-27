@@ -497,6 +497,66 @@
             return '<a href="{{ url('/') }}/hardware/?company_id=' + row.company.id + '"> ' + row.company.name + '</a>';
         }
     }
+    function assetProjectFilterFormatter(value, row) {
+        // console.log(row);
+         if ((row) && (row.id)) {
+            projectid(row.id);
+            return '<a id="td'+row.id+'" href="{{ url('/') }}/hardware/' + row.id + '"></a>';
+         }
+    }
+    function projectid(id){
+            
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            $.ajax({
+                url: "{{ url('/') }}/project/projectid", 
+                method: "post",
+                data:{id:id},
+                success: function(result){
+                  //alert(result['success']);
+                  $("#td"+id).html(result['project_name']);
+                }
+            });
+            
+           
+    }
+    function assetParentProjectFilterFormatter(value, row) {
+        // console.log(row);
+         if ((row) && (row.id)) {
+            parentprojectid(row.id);
+            return '<a id="tdp'+row.id+'" href="{{ url('/') }}/hardware/' + row.id + '"></a>';
+         }
+    }
+    function parentprojectid(id){
+            
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            $.ajax({
+                url: "{{ url('/') }}/project/parentprojectid", 
+                method: "post",
+                data:{id:id},
+                success: function(result){
+                  //alert(result['success']);
+                  $("#tdp"+id).html(result['project_name']);
+                }
+            });
+            
+           
+    }
 
     function usersCompanyObjFilterFormatter(value, row) {
         if (value) {

@@ -131,7 +131,22 @@
               </label>
             </div>
           </div>
-
+          <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
+            <label for="order_number" class="col-md-3 control-label">
+              Project
+            </label>
+            <div class="col-md-7">
+              <!-- <input class="form-control" type="text" name="projectID" id="projectID" value="{{ Input::old('projectID') }}" /> -->
+              <?php $projects = \App\Helpers\Helper::childrens_project_list(); ?>
+              <select id="projectID" name="projectID">
+                 <option value=""></option>
+                 @foreach($projects as $project)
+                 <option value="{{$project->id}}">{{$project->project_name}}</option>
+                 @endforeach
+              </select>
+              
+            </div>
+          </div>
           @foreach ($assets as $key => $value)
             <input type="hidden" name="ids[{{ $key }}]" value="1">
           @endforeach
