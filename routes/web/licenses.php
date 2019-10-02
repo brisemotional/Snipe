@@ -47,3 +47,4 @@ Route::resource('licenses', 'LicensesController', [
     'middleware' => ['auth'],
     'parameters' => ['license' => 'license_id']
 ]);
+Route::resource('project.licenses', 'LicensesController');

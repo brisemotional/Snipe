@@ -12,7 +12,8 @@
                 <option value=""></option>
             @endif -->
             @foreach($projects as $project)
-            <option value="{{$project->id}}">{{$project->project_name}}</option>
+            <?php $parent_name = \App\Helpers\Helper::parent_project($project->id); ?>
+            <option value="{{$project->id}}">{{$project->project_name}}&nbsp&nbsp({{$parent_name->project_name}})</option>
             @endforeach
         </select>
     </div>

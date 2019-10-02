@@ -40,6 +40,38 @@ Route::group(['middleware' => 'auth'], function () {
                 'as' => 'project/parentprojectid',
                 'uses' => 'ProjectController@parentprojectid'
             ]);
+            Route::post( 'lprojectid',  [
+                'as' => 'project/lprojectid',
+                'uses' => 'ProjectController@lprojectid'
+            ]);
+            Route::post( 'lparentprojectid',  [
+                'as' => 'project/lparentprojectid',
+                'uses' => 'ProjectController@lparentprojectid'
+            ]);
+            Route::post( 'aprojectid',  [
+                'as' => 'project/lprojectid',
+                'uses' => 'ProjectController@aprojectid'
+            ]);
+            Route::post( 'aparentprojectid',  [
+                'as' => 'project/aparentprojectid',
+                'uses' => 'ProjectController@aparentprojectid'
+            ]);
+            Route::post( 'nprojectid',  [
+                'as' => 'project/nprojectid',
+                'uses' => 'ProjectController@nprojectid'
+            ]);
+            Route::post( 'nparentprojectid',  [
+                'as' => 'project/nparentprojectid',
+                'uses' => 'ProjectController@nparentprojectid'
+            ]);
+            Route::post( 'mprojectid',  [
+                'as' => 'project/mprojectid',
+                'uses' => 'ProjectController@mprojectid'
+            ]);
+            Route::post( 'mparentprojectid',  [
+                'as' => 'project/mparentprojectid',
+                'uses' => 'ProjectController@mparentprojectid'
+            ]);
 
     });
 

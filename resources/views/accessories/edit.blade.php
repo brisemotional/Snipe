@@ -36,6 +36,6 @@
 @endif
 
 @include ('partials.forms.edit.image-upload')
-
+@include ('partials.forms.edit.project-select', ['translated_name' => 'Project', 'fieldname' => 'projectID'])
 
 @stop

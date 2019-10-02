@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Project;
 use Auth;
 use Config;
 use DB;
@@ -36,10 +37,10 @@ class ConsumablesController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index($project=0)
     {
         $this->authorize('index', Consumable::class);
-        return view('consumables/index');
+        return view('consumables/index')->with('project',$project);
     }
 
 
@@ -70,6 +71,7 @@ class ConsumablesController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
+        $parentprojectID = Project::find($request->input('projectID'))->parent_id;
         $this->authorize('create', Consumable::class);
         $consumable = new Consumable();
         $consumable->name                   = $request->input('name');
@@ -85,7 +87,8 @@ class ConsumablesController extends Controller
         $consumable->purchase_cost          = Helper::ParseFloat($request->input('purchase_cost'));
         $consumable->qty                    = $request->input('qty');
         $consumable->user_id                = Auth::id();
-
+        $consumable->projectID               = $request->input('projectID');
+        $consumable->parentprojectID         = $parentprojectID;
 
         if ($request->file('image')) {
             $image = $request->file('image');
@@ -157,7 +160,7 @@ class ConsumablesController extends Controller
         $consumable->purchase_date          = $request->input('purchase_date');
         $consumable->purchase_cost          = Helper::ParseFloat(Input::get('purchase_cost'));
         $consumable->qty                    = Helper::ParseFloat(Input::get('qty'));
-
+        $consumable->projectID              = $request->input('projectID');
         if ($request->file('image')) {
             $image = $request->file('image');
             $file_name = str_random(25).".".$image->getClientOriginalExtension();

@@ -682,6 +682,11 @@ class Helper
         $project = Project::where('parent_id','=',$id)->get();
         return $project;
     }
+    public static function parent_project($id){
+        $parentID = Project::find($id)->parent_id;
+        $project  = Project::find($parentID);
+        return $project;
+    }
     public static function projectID($id){
         $project = Assets::find($id);
         return Assets::find($id);

@@ -29,3 +29,4 @@ Route::resource('accessories', 'AccessoriesController', [
     'middleware' => ['auth'],
     'parameters' => ['accessory' => 'accessory_id']
 ]);
+Route::resource('project.accessories', 'AccessoriesController');

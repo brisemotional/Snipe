@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
     <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
-
+    <script type="text/javascript" src="{{ url(asset('js/plugins/jQuery/jQuery-2.1.4.min.css')) }}"></script>
 
     @if (($snipeSettings) && ($snipeSettings->header_color))
         <style>

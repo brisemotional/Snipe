@@ -38,7 +38,7 @@
       window.Laravel = { csrfToken: '{{ csrf_token() }}' };
 
     </script>
-
+    <script type="text/javascript" src="{{ url(asset('js/plugins/jQuery/jQuery-2.1.4.min.js')) }}"></script>
 
       @if (($snipeSettings) && ($snipeSettings->skin!=''))
           <link rel="stylesheet" href="{{ url('css/skins/skin-'.$snipeSettings->skin) }}.css">
@@ -393,6 +393,83 @@
               </a>
             </li>
             @endcan
+
+            @can('index', \App\Models\Asset::class)
+            <li id="projectlist" class="treeview">
+            <script type="text/javascript">
+              document.getElementById("projectlist").classList.remove("active");
+              $(document).ready(function(){
+                var ullist = $("#uuu").css("display");
+                //alert(ullist);
+                if(ullist == 'none'){
+                  $(".dropdown-menu1").css('left','175px');
+                }
+                else{$(".dropdown-menu1").css('left','225px');}
+
+                $(".sidebar-toggle").click(function(){
+                  var ullist = $("#uuu").css("display");
+                  //alert(ullist);
+                  if(ullist == 'none'){
+                    $(".dropdown-menu1").css('left','225px');
+                  }
+                  else{$(".dropdown-menu1").css('left','175px');}
+                })
+              });
+              
+            </script>
+              <a href="">
+                <i class="fa fa-car"></i>
+                <span id="uuu">Contract Vehicles</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                
+                <?php $projects = \App\Helpers\Helper::parent_project_list(); ?>
+                @foreach($projects as $project)
+                  @if(Request::is('project/'.$project->id.'/hardware')||Request::is('project/'.$project->id.'/licenses')||Request::is('project/'.$project->id.'/accessories')||Request::is('project/'.$project->id.'/consumables')||Request::is('project/'.$project->id.'/components'))
+                      <script type="text/javascript">document.getElementById("projectlist").classList.add("active");</script>                  
+                  @endif
+                <li class="treeview">                  
+                  <ul class="sidebar-menu">              
+                      <li  class="dropdown-item dropdown" style="position: relative;">
+                        <a href="{{ url('project/'.$project->id.'/hardware') }}" class="dropdown-toggle"  data-toggle="" aria-haspopup="true" aria-expanded="true">{{$project->project_name}}</a>
+                        <?php $child_projects = \App\Helpers\Helper::children_project_list($project->id); ?>
+                        @if(count($child_projects) != 0)
+                        <ul class="dropdown-menu dropdown-menu1" aria-labelledby="dropdown2-1-1" style="top: 5px; left: 223px;display: block;">
+                            
+                            @foreach($child_projects as $child)
+                                  @if(Request::is('project/'.$child->id.'/hardware')||Request::is('project/'.$child->id.'/licenses')||Request::is('project/'.$child->id.'/accessories')||Request::is('project/'.$child->id.'/consumables')||Request::is('project/'.$child->id.'/components'))
+                                      <script type="text/javascript">document.getElementById("projectlist").classList.add("active");</script>                  
+                                  @endif
+                                  <li class="treeview">                  
+                                    <ul class="sidebar-menu">              
+                                        <li  class="dropdown-item dropdown" style="position: relative;">
+                                          <a href="{{ url('project/'.$child->id.'/hardware') }}" class="dropdown-toggle"  data-toggle="" aria-haspopup="true" aria-expanded="true">{{$child->project_name}}</a>
+                                          <ul class="dropdown-menu" aria-labelledby="dropdown2-1-1" style="top: 0px; left: 160px;display: block;">                 
+                                              <li class="dropdown-item" ><a href="{{ url('project/'.$child->id.'/hardware') }}">Assets</a></li>
+                                              <li class="dropdown-item" ><a href="{{ url('project/'.$child->id.'/accessories') }}">Accessories</a></li> 
+                                              <li class="dropdown-item" ><a href="{{ url('project/'.$child->id.'/licenses') }}">Licenses</a></li>
+                                              <li class="dropdown-item" ><a href="{{ url('project/'.$child->id.'/consumables') }}">Consumables</a></li>
+                                              <li class="dropdown-item" ><a href="{{ url('project/'.$child->id.'/components') }}">Components</a></li>
+                                                                         
+                                          </ul>
+                                        </li>  
+                                    </ul>
+                                  </li>
+                                
+                            @endforeach
+                                          
+                        </ul>
+                        @endif 
+                      </li>  
+                  </ul>
+                </li>
+                @endforeach
+                
+              </ul>                
+            </li>
+            @endcan
+
             @can('index', \App\Models\Asset::class)
             <li class="treeview{{ (Request::is('hardware*') ? ' active' : '') }}">
                 <a href="#"><i class="fa fa-barcode"></i>
@@ -696,37 +773,7 @@
                 </ul>
             </li>
             @endcan
-            <!-- ddd -->
-            <!-- @can('index', \App\Models\Asset::class)
-            <li class="treeview{{ (Request::is('project/9/hardware') ||  Request::is('project/2/hardware') ||  Request::is('project/3/hardware') ||  Request::is('project/4/hardware') ||  Request::is('project/10/hardware') ||  Request::is('project/6/hardware') ||  Request::is('project/7/hardware') ||  Request::is('project/8/hardware')? ' active' : '') }}">
-              <a href="">
-                <i class="fa fa-folder"></i>
-                <span>{{ trans('general.project') }}</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                
-                <?php $projects = \App\Helpers\Helper::parent_project_list(); ?>
-                @foreach($projects as $project)
-                <li class="treeview{{ (Request::is('project/'.$project->id.'/hardware') ? ' active' : '') }}">                  
-                  <ul class="sidebar-menu">              
-                      <li  class="dropdown-item dropdown" style="position: relative;">
-                        <a href="{{ url('project/'.$project->id.'/hardware') }}" class="dropdown-toggle"  data-toggle="" aria-haspopup="true" aria-expanded="true">{{$project->project_name}}</a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown2-1-1" style="top: 5px; left: 223px;display: block;">
-                            <?php $child_projects = \App\Helpers\Helper::children_project_list($project->id); ?>
-                            @foreach($child_projects as $child)
-                            <li class="dropdown-item" ><a href="{{ url('project/'.$child->id.'/hardware') }}">{{$child->project_name}}</a></li>
-                            @endforeach                
-                        </ul>
-                      </li>  
-                  </ul>
-                </li>
-                @endforeach
-                
-              </ul>                
-            </li>
-            @endcan -->
-            <!-- fdsfs -->
+            
             @can('viewRequestable', \App\Models\Asset::class)
             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
                 <a href="{{ route('requestable-assets') }}">
@@ -736,48 +783,7 @@
             </li>
             @endcan
 
-            @can('index', \App\Models\Asset::class)
-            <li class="treeview{{ (Request::is('project/9/hardware') ||  Request::is('project/2/hardware') ||  Request::is('project/3/hardware') ||  Request::is('project/4/hardware') ||  Request::is('project/10/hardware') ||  Request::is('project/6/hardware') ||  Request::is('project/7/hardware') ||  Request::is('project/8/hardware')? ' active' : '') }}">
-              <a href="">
-                <i class="fa fa-folder"></i>
-                <span>{{ trans('general.project') }}</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                
-                <?php $projects = \App\Helpers\Helper::parent_project_list(); ?>
-                @foreach($projects as $project)
-                <li class="treeview{{ (Request::is('project/'.$project->id.'/hardware') ? ' active' : '') }}">                  
-                  <ul class="sidebar-menu">              
-                      <li  class="dropdown-item dropdown" style="position: relative;">
-                        <a href="{{ url('project/'.$project->id.'/hardware') }}" class="dropdown-toggle"  data-toggle="" aria-haspopup="true" aria-expanded="true">{{$project->project_name}}</a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown2-1-1" style="top: 5px; left: 223px;display: block;">
-                            <?php $child_projects = \App\Helpers\Helper::children_project_list($project->id); ?>
-                            @foreach($child_projects as $child)
-                               
-                                  <li class="treeview">                  
-                                    <ul class="sidebar-menu">              
-                                        <li  class="dropdown-item dropdown" style="position: relative;">
-                                          <a href="{{ url('project/'.$child->id.'/hardware') }}" class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{{$child->project_name}}</a>
-                                          <ul class="dropdown-menu" aria-labelledby="dropdown2-1-1" style="top: 0px; left: 160px;display: block;">                 
-                                              <li class="dropdown-item" ><a href="{{ url('project/'.$child->id.'/hardware') }}">Assets</a></li> 
-                                              <li class="dropdown-item" ><a href="">Lisences</a></li>
-                                              <li class="dropdown-item" ><a href="">Accessories</a></li>                           
-                                          </ul>
-                                        </li>  
-                                    </ul>
-                                  </li>
-                                
-                            @endforeach                
-                        </ul>
-                      </li>  
-                  </ul>
-                </li>
-                @endforeach
-                
-              </ul>                
-            </li>
-            @endcan
+            
             
           </ul>
 
@@ -901,7 +907,7 @@
     </div>
 
 
-
+    <script type="text/javascript" src="{{ url(asset('js/plugins/jQuery/jQuery-2.1.4.min.css')) }}"></script>
     <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
 
     @section('moar_scripts')

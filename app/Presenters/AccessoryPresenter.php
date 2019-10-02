@@ -126,7 +126,21 @@ class AccessoryPresenter extends Presenter
                 "switchable" => false,
                 "title" => trans('table.actions'),
                 "formatter" => "accessoriesActionsFormatter",
-            ]
+            ], [
+                "field" => "Project",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => true,
+                "title" => "Project",
+                "formatter" => "accessoryProjectFilterFormatter"
+            ], [
+                "field" => "ParentProject",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => true,
+                "title" => "ParentProject",
+                "formatter" => "accessoryParentProjectFilterFormatter"
+            ],
         ];
 
         return json_encode($layout);

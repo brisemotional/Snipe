@@ -132,7 +132,21 @@ class ConsumablePresenter extends Presenter
                 "title" => trans('table.actions'),
                 "visible" => true,
                 "formatter" => "consumablesActionsFormatter",
-            ]
+            ], [
+                "field" => "Project",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => true,
+                "title" => "Project",
+                "formatter" => "consumablesProjectFilterFormatter"
+            ], [
+                "field" => "ParentProject",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => true,
+                "title" => "ParentProject",
+                "formatter" => "consumablesParentProjectFilterFormatter"
+            ],
         ];
 
         return json_encode($layout);

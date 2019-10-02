@@ -119,5 +119,5 @@
 </div>
 
 @include ('partials.forms.edit.notes')
-
+@include ('partials.forms.edit.project-select', ['translated_name' => 'Project', 'fieldname' => 'projectID'])
 @stop

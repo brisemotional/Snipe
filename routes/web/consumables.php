@@ -17,3 +17,4 @@
         'middleware' => ['auth'],
         'parameters' => ['consumable' => 'consumable_id']
     ]);
+    Route::resource('project.consumables', 'ConsumablesController');

@@ -42,9 +42,19 @@
 @stop
 
 @section('header_right')
-  <a href="{{ route('reports/custom') }}" style="margin-right: 5px;" class="btn btn-default">
-    Custom Export</a>
+  @if($project != 0)
+  <div style="margin-bottom: 60px;">    
+    <a href="{{ url('project/'.$project.'/components') }}" class="btn btn-primary pull-right" style="margin-right: 10px;"> Components</a>
+    <a href="{{ url('project/'.$project.'/consumables') }}" class="btn btn-primary pull-right" style="margin-right: 10px;"> Consumables</a>
+    <a href="{{ url('project/'.$project.'/licenses') }}" class="btn btn-primary pull-right" style="margin-right: 10px;"> Licenses</a>
+    <a href="{{ url('project/'.$project.'/accessories') }}" class="btn btn-primary pull-right" style="margin-right: 10px;"> Accessories</a>
+    <a href="{{ url('project/'.$project.'/hardware') }}" class="btn btn-primary pull-right" style="margin-right: 10px;"> Assets</a>
+  </div>
+  @endif
+  
   <a href="{{ route('hardware.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
+  <a href="{{ route('reports/custom') }}" style="margin-right: 5px;" class="btn btn-default pull-right">
+    Custom Export</a>
 @stop
 
 {{-- Page content --}}

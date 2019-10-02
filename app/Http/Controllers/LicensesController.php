@@ -8,6 +8,7 @@ use Input;
 use Lang;
 use App\Models\License;
 use App\Models\Asset;
+use App\Models\Project;
 use App\Models\User;
 use App\Models\Actionlog;
 use DB;
@@ -41,10 +42,10 @@ class LicensesController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index($project=0)
     {
         $this->authorize('view', License::class);
-        return view('licenses/index');
+        return view('licenses/index')->with('project', $project);
     }
 
 
@@ -86,6 +87,7 @@ class LicensesController extends Controller
      */
     public function store(Request $request)
     {
+        $parentprojectID = Project::find($request->input('projectID'))->parent_id;
         $this->authorize('create', License::class);
         // create a new model instance
         $license = new License();
@@ -111,7 +113,8 @@ class LicensesController extends Controller
         $license->category_id       = $request->input('category_id');
         $license->termination_date  = $request->input('termination_date');
         $license->user_id           = Auth::id();
-
+        $asset->projectID               = $request->input('projectID');
+        $asset->parentprojectID         = $parentprojectID;
         if ($license->save()) {
             return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.create.success'));
         }
@@ -187,7 +190,7 @@ class LicensesController extends Controller
         $license->manufacturer_id   =  $request->input('manufacturer_id');
         $license->supplier_id       = $request->input('supplier_id');
         $license->category_id       = $request->input('category_id');
-
+        $license->projectID         = $request->input('projectID');
         if ($license->save()) {
             return redirect()->route('licenses.show', ['license' => $licenseId])->with('success', trans('admin/licenses/message.update.success'));
         }

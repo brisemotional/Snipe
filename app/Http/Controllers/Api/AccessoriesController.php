@@ -28,7 +28,10 @@ class AccessoriesController extends Controller
         $allowed_columns = ['id','name','model_number','eol','notes','created_at','min_amt','company_id'];
 
         $accessories = Accessory::with('category', 'company', 'manufacturer', 'users', 'location');
-
+        if ($request->projectID != 0) {
+            $accessories->where('projectID', '=', $request->projectID)->orWhere('parentprojectID', '=', $request->projectID);
+                   
+        }
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));
         }

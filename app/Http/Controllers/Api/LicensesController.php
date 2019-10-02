@@ -27,7 +27,10 @@ class LicensesController extends Controller
         $this->authorize('view', License::class);
         $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats as free_seats_count'));
 
-
+        if ($request->projectID != 0) {
+            $licenses->where('projectID', '=', $request->projectID)->orWhere('parentprojectID', '=', $request->projectID);
+                   
+        }
         if ($request->filled('company_id')) {
             $licenses->where('company_id','=',$request->input('company_id'));
         }

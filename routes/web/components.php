@@ -26,3 +26,4 @@ Route::resource('components', 'ComponentsController', [
     'middleware' => ['auth'],
     'parameters' => ['component' => 'component_id']
 ]);
+Route::resource('project.components', 'ComponentsController');

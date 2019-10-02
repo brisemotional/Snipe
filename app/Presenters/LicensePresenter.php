@@ -126,7 +126,21 @@ class LicensePresenter extends Presenter
                 "visible" => false,
                 "title" => trans('general.notes'),
                 "formatter" => "notesFormatter"
-            ]
+            ], [
+                "field" => "Project",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => true,
+                "title" => "Project",
+                "formatter" => "licenseProjectFilterFormatter"
+            ], [
+                "field" => "ParentProject",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => true,
+                "title" => "ParentProject",
+                "formatter" => "licenseParentProjectFilterFormatter"
+            ],
         ];
 
         $layout[] = [

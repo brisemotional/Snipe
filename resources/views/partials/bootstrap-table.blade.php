@@ -498,10 +498,38 @@
         }
     }
     function assetProjectFilterFormatter(value, row) {
-        // console.log(row);
+         //console.log(row);
          if ((row) && (row.id)) {
             projectid(row.id);
             return '<a id="td'+row.id+'" href="{{ url('/') }}/hardware/' + row.id + '"></a>';
+         }
+    }
+    function licenseProjectFilterFormatter(value, row) {
+         //console.log(row.id);
+         if ((row) && (row.id)) {
+            lprojectid(row.id);
+            return '<a id="td'+row.id+'" href="{{ url('/') }}/licenses/' + row.id + '"></a>';
+         }
+    }
+    function accessoryProjectFilterFormatter(value, row) {
+         //console.log(row.id);
+         if ((row) && (row.id)) {
+            aprojectid(row.id);
+            return '<a id="td'+row.id+'" href="{{ url('/') }}/accessories/' + row.id + '"></a>';
+         }
+    }
+    function consumablesProjectFilterFormatter(value, row) {
+         //console.log(row.id);
+         if ((row) && (row.id)) {
+            nprojectid(row.id);
+            return '<a id="td'+row.id+'" href="{{ url('/') }}/consumables/' + row.id + '"></a>';
+         }
+    }
+    function componentsProjectFilterFormatter(value, row) {
+         //console.log(row.id);
+         if ((row) && (row.id)) {
+            mprojectid(row.id);
+            return '<a id="td'+row.id+'" href="{{ url('/') }}/components/' + row.id + '"></a>';
          }
     }
     function projectid(id){
@@ -527,11 +555,131 @@
             
            
     }
+    function lprojectid(id){
+            
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            $.ajax({
+                url: "{{ url('/') }}/project/lprojectid", 
+                method: "post",
+                data:{id:id},
+                success: function(result){
+                  //alert(result['success']);
+                  $("#td"+id).html(result['project_name']);
+                }
+            });
+            
+           
+    }
+    function aprojectid(id){
+            
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            $.ajax({
+                url: "{{ url('/') }}/project/aprojectid", 
+                method: "post",
+                data:{id:id},
+                success: function(result){
+                  //alert(result['success']);
+                  $("#td"+id).html(result['project_name']);
+                }
+            });
+            
+           
+    }
+    function nprojectid(id){
+            
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            $.ajax({
+                url: "{{ url('/') }}/project/nprojectid", 
+                method: "post",
+                data:{id:id},
+                success: function(result){
+                  //alert(result['success']);
+                  $("#td"+id).html(result['project_name']);
+                }
+            });
+            
+           
+    }
+    function mprojectid(id){
+            
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            $.ajax({
+                url: "{{ url('/') }}/project/mprojectid", 
+                method: "post",
+                data:{id:id},
+                success: function(result){
+                  //alert(result['success']);
+                  $("#td"+id).html(result['project_name']);
+                }
+            });
+            
+           
+    }
     function assetParentProjectFilterFormatter(value, row) {
         // console.log(row);
          if ((row) && (row.id)) {
             parentprojectid(row.id);
             return '<a id="tdp'+row.id+'" href="{{ url('/') }}/hardware/' + row.id + '"></a>';
+         }
+    }
+    function licenseParentProjectFilterFormatter(value, row) {
+        // console.log(row);
+         if ((row) && (row.id)) {
+            lparentprojectid(row.id);
+            return '<a id="tdp'+row.id+'" href="{{ url('/') }}/licenses/' + row.id + '"></a>';
+         }
+    }
+    function accessoryParentProjectFilterFormatter(value, row) {
+        // console.log(row);
+         if ((row) && (row.id)) {
+            aparentprojectid(row.id);
+            return '<a id="tdp'+row.id+'" href="{{ url('/') }}/accessories/' + row.id + '"></a>';
+         }
+    }
+    function consumablesParentProjectFilterFormatter(value, row) {
+        // console.log(row);
+         if ((row) && (row.id)) {
+            nparentprojectid(row.id);
+            return '<a id="tdp'+row.id+'" href="{{ url('/') }}/consumables/' + row.id + '"></a>';
+         }
+    }
+    function componentsParentProjectFilterFormatter(value, row) {
+        // console.log(row);
+         if ((row) && (row.id)) {
+            mparentprojectid(row.id);
+            return '<a id="tdp'+row.id+'" href="{{ url('/') }}/components/' + row.id + '"></a>';
          }
     }
     function parentprojectid(id){
@@ -547,6 +695,98 @@
             });
             $.ajax({
                 url: "{{ url('/') }}/project/parentprojectid", 
+                method: "post",
+                data:{id:id},
+                success: function(result){
+                  //alert(result['success']);
+                  $("#tdp"+id).html(result['project_name']);
+                }
+            });
+            
+           
+    }
+    function lparentprojectid(id){
+            
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            $.ajax({
+                url: "{{ url('/') }}/project/lparentprojectid", 
+                method: "post",
+                data:{id:id},
+                success: function(result){
+                  //alert(result['success']);
+                  $("#tdp"+id).html(result['project_name']);
+                }
+            });
+            
+           
+    }
+    function aparentprojectid(id){
+            
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            $.ajax({
+                url: "{{ url('/') }}/project/aparentprojectid", 
+                method: "post",
+                data:{id:id},
+                success: function(result){
+                  //alert(result['success']);
+                  $("#tdp"+id).html(result['project_name']);
+                }
+            });
+            
+           
+    }
+    function nparentprojectid(id){
+            
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            $.ajax({
+                url: "{{ url('/') }}/project/nparentprojectid", 
+                method: "post",
+                data:{id:id},
+                success: function(result){
+                  //alert(result['success']);
+                  $("#tdp"+id).html(result['project_name']);
+                }
+            });
+            
+           
+    }
+    function mparentprojectid(id){
+            
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            $.ajax({
+                url: "{{ url('/') }}/project/mparentprojectid", 
                 method: "post",
                 data:{id:id},
                 success: function(result){

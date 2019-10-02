@@ -345,7 +345,7 @@ class AssetsController extends Controller
         $asset->asset_tag    = $request->input('asset_tag');
         $asset->notes        = $request->input('notes');
         $asset->physical     = '1';
-
+        $asset->projectID = $request->input('projectID');
         // Update the image
         if ($request->filled('image')) {
             $image = $request->input('image');

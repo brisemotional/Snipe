@@ -5,6 +5,7 @@ use App\Helpers\Helper;
 use App\Models\Accessory;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\Project;
 use Auth;
 use Carbon\Carbon;
 use Config;
@@ -37,10 +38,10 @@ class AccessoriesController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function index(Request $request)
+    public function index(Request $request,$project=0)
     {
         $this->authorize('index', Accessory::class);
-        return view('accessories/index');
+        return view('accessories/index')->with("project",$project);
     }
 
 
@@ -67,6 +68,7 @@ class AccessoriesController extends Controller
    */
     public function store(ImageUploadRequest $request)
     {
+        $parentprojectID = Project::find($request->input('projectID'))->parent_id;
         $this->authorize(Accessory::class);
         // create a new model instance
         $accessory = new Accessory();
@@ -85,7 +87,8 @@ class AccessoriesController extends Controller
         $accessory->qty                     = request('qty');
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
-
+        $accessory->projectID               = $request->input('projectID');
+        $accessory->parentprojectID         = $parentprojectID;
         if ($request->hasFile('image')) {
 
             if (!config('app.lock_passwords')) {
@@ -164,7 +167,7 @@ class AccessoriesController extends Controller
         $accessory->purchase_cost           = request('purchase_cost');
         $accessory->qty                     = request('qty');
         $accessory->supplier_id             = request('supplier_id');
-
+        $accessory->projectID = $request->input('projectID');
         if ($request->hasFile('image')) {
 
             if (!config('app.lock_passwords')) {

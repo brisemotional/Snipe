@@ -27,6 +27,10 @@ class ComponentsController extends Controller
         $components = Company::scopeCompanyables(Component::select('components.*')
             ->with('company', 'location', 'category'));
 
+        if ($request->projectID != 0) {
+            $components->where('projectID', '=', $request->projectID)->orWhere('parentprojectID', '=', $request->projectID);
+                   
+        }
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
         }

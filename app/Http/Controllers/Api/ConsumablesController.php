@@ -26,7 +26,10 @@ class ConsumablesController extends Controller
             Consumable::select('consumables.*')
                 ->with('company', 'location', 'category', 'users', 'manufacturer')
         );
-
+        if ($request->projectID != 0) {
+            $consumables->where('projectID', '=', $request->projectID)->orWhere('parentprojectID', '=', $request->projectID);
+                   
+        }
         if ($request->filled('search')) {
             $consumables = $consumables->TextSearch(e($request->input('search')));
         }

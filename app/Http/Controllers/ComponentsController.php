@@ -10,6 +10,7 @@ use App\Models\CustomField;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Asset;
+use App\Models\Project;
 use Auth;
 use Config;
 use DB;
@@ -42,10 +43,10 @@ class ComponentsController extends Controller
     * @since [v3.0]
      * @return \Illuminate\Contracts\View\View
     */
-    public function index()
+    public function index($project=0)
     {
         $this->authorize('view', Component::class);
-        return view('components/index');
+        return view('components/index')->with("project",$project);
     }
 
 
@@ -76,6 +77,7 @@ class ComponentsController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
+        $parentprojectID = Project::find($request->input('projectID'))->parent_id;
         $this->authorize('create', Component::class);
         $component = new Component();
         $component->name                   = $request->input('name');
@@ -89,7 +91,8 @@ class ComponentsController extends Controller
         $component->purchase_cost          = $request->input('purchase_cost', null);
         $component->qty                    = $request->input('qty');
         $component->user_id                = Auth::id();
-
+        $component->projectID               = $request->input('projectID');
+        $component->parentprojectID         = $parentprojectID;
 
         if ($request->file('image')) {
             $image = $request->file('image');
@@ -163,7 +166,7 @@ class ComponentsController extends Controller
         $component->purchase_date          = Input::get('purchase_date');
         $component->purchase_cost          = request('purchase_cost');
         $component->qty                    = Input::get('qty');
-
+        $component->projectID              = $request->input('projectID');
         if ($request->file('image')) {
             $image = $request->file('image');
             $file_name = str_random(25).".".$image->getClientOriginalExtension();
