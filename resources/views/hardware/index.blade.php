@@ -8,7 +8,7 @@
 
 
 
-@if (Input::get('status'))
+@if (Input::get('status') || $project != 0)
   @if (Input::get('status')=='Pending')
     {{ trans('general.pending') }}
   @elseif (Input::get('status')=='RTD')
@@ -25,6 +25,7 @@
     {{ trans('general.archived') }}
   @elseif (Input::get('status')=='Deleted')
     {{ trans('general.deleted') }}
+  
   @endif
 @else
 {{ trans('general.all') }}

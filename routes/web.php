@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'project','middleware' => ['auth']],
         function () {
 
+            
             Route::post( 'projectid',  [
                 'as' => 'project/projectid',
                 'uses' => 'ProjectController@projectid'

@@ -432,7 +432,7 @@
                 <li class="treeview">                  
                   <ul class="sidebar-menu">              
                       <li  class="dropdown-item dropdown" style="position: relative;">
-                        <a href="{{ url('project/'.$project->id.'/hardware') }}" class="dropdown-toggle"  data-toggle="" aria-haspopup="true" aria-expanded="true">{{$project->project_name}}</a>
+                        <a href="{{ url('project/'.$project->id) }}" class="dropdown-toggle"  data-toggle="" aria-haspopup="true" aria-expanded="true">{{$project->project_name}}</a>
                         <?php $child_projects = \App\Helpers\Helper::children_project_list($project->id); ?>
                         @if(count($child_projects) != 0)
                         <ul class="dropdown-menu dropdown-menu1" aria-labelledby="dropdown2-1-1" style="top: 5px; left: 223px;display: block;">
@@ -444,7 +444,7 @@
                                   <li class="treeview">                  
                                     <ul class="sidebar-menu">              
                                         <li  class="dropdown-item dropdown" style="position: relative;">
-                                          <a href="{{ url('project/'.$child->id.'/hardware') }}" class="dropdown-toggle"  data-toggle="" aria-haspopup="true" aria-expanded="true">{{$child->project_name}}</a>
+                                          <a href="{{ url('project/'.$child->id) }}" class="dropdown-toggle"  data-toggle="" aria-haspopup="true" aria-expanded="true">{{$child->project_name}}</a>
                                           <ul class="dropdown-menu" aria-labelledby="dropdown2-1-1" style="top: 0px; left: 160px;display: block;">                 
                                               <li class="dropdown-item" ><a href="{{ url('project/'.$child->id.'/hardware') }}">Assets</a></li>
                                               <li class="dropdown-item" ><a href="{{ url('project/'.$child->id.'/accessories') }}">Accessories</a></li> 

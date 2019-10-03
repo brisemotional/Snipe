@@ -113,8 +113,8 @@ class LicensesController extends Controller
         $license->category_id       = $request->input('category_id');
         $license->termination_date  = $request->input('termination_date');
         $license->user_id           = Auth::id();
-        $asset->projectID               = $request->input('projectID');
-        $asset->parentprojectID         = $parentprojectID;
+        $license->projectID               = $request->input('projectID');
+        $license->parentprojectID         = $parentprojectID;
         if ($license->save()) {
             return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.create.success'));
         }

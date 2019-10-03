@@ -17,9 +17,10 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        
+        echo "dfdsfdsf";
     }
 
     /**
@@ -51,7 +52,8 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->authorize('index', Consumable::class);
+        return view('project/index')->with('project',$id);
     }
 
     /**

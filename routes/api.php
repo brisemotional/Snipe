@@ -394,16 +394,8 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
             'parameters' => ['asset' => 'asset_id']
         ]
     ); // Hardware resource
-    Route::resource('projecthardware', 'ProjectController',
-        [
-            'names' =>
-                [
-                    
-                ],
-            'except' => ['create', 'edit'],
-            
-        ]
-    ); // projectHardware resource
+
+    
 
 
     /*--- Imports API ---*/
